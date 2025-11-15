@@ -60,6 +60,8 @@ int main() {
         // FATORIAL
         cout << "Digite um numero inteiro nao negativo: ";
         cin >> n;
+        unsigned long long fat = factorial(n);                          
+        cout << fixed << setprecision(3);
         cout << "Fatorial de " << n << " e: " << factorial(n) << endl;
    
     } else if (operacao == '+' || operacao == '-' || operacao == '*' || operacao == '/' || operacao == '^') {
