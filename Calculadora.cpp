@@ -1,11 +1,14 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <iomanip>
+#include <algorithm>
+
 
 using namespace std;
 
+// Função para calcular o fatorial
 unsigned long long factorial(int n) {
-
     if (n < 0) {
         cerr << "Erro: Fatorial nao definido para numeros negativos." << endl;
         exit(1); // Termina o programa indicando um erro
@@ -18,8 +21,26 @@ unsigned long long factorial(int n) {
     return fat;
 }
 
-int main() {
+// Função para formatar o número com separadores de milhar no formato brasileiro.
+string formatar_numero_pt_br(unsigned long long numero) {
+    string numero_str = to_string(numero);
+    string resultado = "";
+    int contador = 0;
 
+    for (int i = numero_str.length() - 1; i >= 0; i--) {
+        resultado = numero_str[i] + resultado;
+        contador++;
+
+        if (contador == 3 && i != 0) {
+            resultado = "." + resultado;
+            contador = 0;
+        }
+    }
+
+    return resultado;
+}
+
+int main() { 
     string name;
     double x, y, resultado;
     int n;
@@ -58,12 +79,11 @@ int main() {
     } else if (operacao == '!') {
 
         // FATORIAL
-        cout << "Digite um numero inteiro nao negativo: ";
+        cout << "Digite um numero inteiro (nao negativo): ";
         cin >> n;
-        unsigned long long fat = factorial(n);                          
-        cout << fixed << setprecision(3);
-        cout << "Fatorial de " << n << " e: " << factorial(n) << endl;
-   
+        unsigned long long fat = factorial(n);
+        cout << "Fatorial de " << n << " e: " << formatar_numero_pt_br(fat) << endl;   
+    
     } else if (operacao == '+' || operacao == '-' || operacao == '*' || operacao == '/' || operacao == '^') {
         // OPERACOES BINÁRIAS
         cout << "Digite o primeiro numero: ";
